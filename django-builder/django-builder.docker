@@ -1,0 +1,12 @@
+FROM elbaschid/python-base
+MAINTAINER Sebastian Vetter <seb@roadsi.de>
+
+RUN apt-get update -qq && apt-get upgrade -y -q && \
+    apt-get install -y vim \
+                       curl \
+                       build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+ADD scripts/builder.sh /env/bin/builder.sh
+CMD ["/env/bin/builder.sh"]

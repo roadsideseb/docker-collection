@@ -1,0 +1,24 @@
+FROM debian:jessie
+MAINTAINER Sebastian Vetter <seb@roadsi.de>
+
+RUN apt-get update -qq && \
+    apt-get upgrade -y -q && \ 
+    apt-get install -y python-dev \
+                       vim \
+                       curl \
+                       libpq-dev \
+                       libxml2-dev \
+                       libbz2-dev \
+                       zlib1g-dev \
+                       libfreetype6-dev \
+                       libjpeg-dev \
+                       libpq5 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
+    python /tmp/get-pip.py && \
+    pip install --no-cache-dir virtualenv && \
+    rm /tmp/get-pip.py
+
+CMD /bin/bash
