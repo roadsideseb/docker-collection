@@ -1,0 +1,12 @@
+FROM elbaschid/python-base:latest
+MAINTAINER Sebastian Vetter <seb@roadsi.de>
+
+ADD ./.build/static /static
+ADD ./.build/venv /venv
+ADD ./app /app
+ADD ./uwsgi /app/uwsgi
+
+WORKDIR /app
+EXPOSE 8000
+
+CMD /venv/bin/uwsgi --ini uwsgi/production.ini

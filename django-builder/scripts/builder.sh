@@ -19,7 +19,10 @@ install_requirements () {
 
 build_assets () {
     pushd ${app_dir}
-    python manage.py compress -f
+    if python manage.py | grep compress
+    then
+        python manage.py compress -f
+    fi
     python manage.py collectstatic --noinput 
     popd
 }
